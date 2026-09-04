@@ -121,29 +121,26 @@ font-weight:bold;
 </button>
 </header>
 
-<div class="grid">
-
 <div class="card">
 
-<h2>Fundamental Analyzer</h2>
+<h2>⭐ Watchlist</h2>
 
-<input id="price" placeholder="Harga Saham">
+<input
+id="stockInput"
+placeholder="Kode Saham (BBCA)"
+>
 
-<input id="eps" placeholder="EPS">
-
-<input id="bvps" placeholder="BVPS">
-
-<input id="roe" placeholder="ROE (%)">
-
-<input id="der" placeholder="DER">
-
-<button onclick="analyzeFundamental()">
-Analisis Fundamental
+<button onclick="addWatchlist()">
+Tambah Saham
 </button>
 
-<div id="fundamentalResult"
-class="result">
-Masukkan data...
+<div
+id="watchlist"
+class="result"
+>
+
+Belum ada saham
+
 </div>
 
 </div>
@@ -168,6 +165,34 @@ Masukkan data...
 </div>
 
 </div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>⭐ Watchlist</h2>
+
+<input
+id="stockInput"
+placeholder="Kode Saham (BBCA)"
+>
+
+<button onclick="addWatchlist()">
+Tambah Saham
+</button>
+
+<div
+id="watchlist"
+class="result"
+>
+
+Belum ada saham
 
 </div>
 
@@ -353,7 +378,72 @@ ${signal}
 `;
 
 }
+function addWatchlist(){
 
+let stock =
+document.getElementById("stockInput")
+.value.toUpperCase();
+
+if(!stock) return;
+
+let data =
+JSON.parse(
+localStorage.getItem("watchlist")
+) || [];
+
+data.push(stock);
+
+localStorage.setItem(
+"watchlist",
+JSON.stringify(data)
+);
+
+renderWatchlist();
+
+document.getElementById(
+"stockInput"
+).value = "";
+
+}
+
+function renderWatchlist(){
+
+let data =
+JSON.parse(
+localStorage.getItem("watchlist")
+) || [];
+
+let html = "";
+
+if(data.length === 0){
+
+html = "Belum ada saham";
+
+}else{
+
+data.forEach(stock=>{
+
+html += `
+<div>
+✅ ${stock}
+</div>
+`;
+
+});
+
+}
+
+document.getElementById(
+"watchlist"
+).innerHTML = html;
+
+}
+
+window.onload = function(){
+
+renderWatchlist();
+
+}
 </script>
 
 </body>
