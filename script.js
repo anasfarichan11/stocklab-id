@@ -1,1 +1,1 @@
-console.log("InvestLearn loaded");
+console.log("Portal loaded");
