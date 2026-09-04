@@ -1,107 +1,85 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teori Portofolio & Analisis Investasi</title>
+
+<title>Stock Analyzer Pro</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+font-family:Segoe UI,sans-serif;
 }
 
 body{
 background:#0f172a;
 color:white;
+padding:30px;
+transition:.3s;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+header{
 display:flex;
-}
-
-.sidebar{
-width:280px;
-height:100vh;
-overflow:auto;
-background:#111827;
-position:fixed;
-padding:20px;
-}
-
-.sidebar h2{
-margin-bottom:20px;
-}
-
-.sidebar a{
-display:block;
-color:white;
-text-decoration:none;
-padding:10px;
-border-radius:8px;
-margin-bottom:5px;
-}
-
-.sidebar a:hover{
-background:#1e293b;
-}
-
-.content{
-margin-left:280px;
-padding:40px;
-width:100%;
-}
-
-.hero{
-background:linear-gradient(135deg,#2563eb,#4f46e5);
-padding:60px;
-border-radius:20px;
+justify-content:space-between;
+align-items:center;
 margin-bottom:30px;
 }
 
-.hero h1{
-font-size:48px;
-margin-bottom:15px;
+h1{
+font-size:32px;
 }
 
-.hero p{
-font-size:18px;
-}
-
-.module{
+.card{
 background:#1e293b;
-padding:25px;
-border-radius:15px;
+padding:20px;
+border-radius:20px;
 margin-bottom:20px;
 }
 
-.module h2{
-color:#60a5fa;
-margin-bottom:12px;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:20px;
 }
 
-.module h3{
-margin-top:15px;
-margin-bottom:8px;
-}
-
-.search{
+input{
 width:100%;
-padding:15px;
+padding:12px;
+margin-top:10px;
+margin-bottom:10px;
 border:none;
 border-radius:10px;
-margin-bottom:20px;
-font-size:16px;
 }
 
 button{
-padding:10px 15px;
+padding:12px;
 border:none;
 border-radius:10px;
 cursor:pointer;
+background:#2563eb;
+color:white;
+font-weight:bold;
 }
 
-.dark-toggle{
-margin-bottom:20px;
+button:hover{
+background:#1d4ed8;
+}
+
+.result{
+margin-top:15px;
+padding:15px;
+background:#0f172a;
+border-radius:12px;
 }
 
 .light{
@@ -109,290 +87,236 @@ background:#f4f4f4;
 color:#111;
 }
 
-.light .module{
+.light .card{
 background:white;
 }
 
-.light .sidebar{
-background:#e5e7eb;
+.green{
+color:#22c55e;
+font-weight:bold;
 }
 
-.light .sidebar a{
-color:#111;
+.red{
+color:#ef4444;
+font-weight:bold;
 }
 
-@media(max-width:768px){
-
-body{
-display:block;
+.yellow{
+color:#facc15;
+font-weight:bold;
 }
 
-.sidebar{
-position:relative;
-width:100%;
-height:auto;
-}
-
-.content{
-margin-left:0;
-}
-
-.hero h1{
-font-size:32px;
-}
-
-}
 </style>
 </head>
 
 <body>
 
-<div class="sidebar">
+<div class="container">
 
-<h2>📚 Modul</h2>
+<header>
+<h1>📈 Stock Analyzer Pro</h1>
 
-#m1Modul 1 Investasi</a>
-#m2Modul 2 Pasar Modal</a>
-#m3Modul 3 Return & Risiko</a>
-#m4Modul 4 Saham</a>
-#m5Modul 5 Obligasi</a>
-#m6Modul 6 Portofolio</a>
-<a href="#m7">Modul 7 CAPM & Beta</a>
-8">Modul 8 Online Trading</a>
-Reksa Dana</a>
+<button onclick="toggleTheme()">
+🌙 Theme
+</button>
+</header>
 
-</div>
+<div class="grid">
 
-<div class="content">
+<div class="card">
 
-<button class="dark-toggle" onclick="toggleTheme()">
-🌙 Dark Mode
+<h2>Fundamental Analyzer</h2>
+
+<input id="price" placeholder="Harga Saham">
+
+<input id="eps" placeholder="EPS">
+
+<input id="bvps" placeholder="BVPS">
+
+<input id="roe" placeholder="ROE (%)">
+
+<input id="der" placeholder="DER">
+
+<button onclick="analyzeFundamental()">
+Analisis Fundamental
 </button>
 
-<input
-type="text"
-id="search"
-class="search"
-placeholder="Cari materi..."
-onkeyup="searchModule()"
-/>
-
-<div class="hero">
-<h1>Teori Portofolio & Analisis Investasi</h1>
-<p>
-Portal pembelajaran investasi modern untuk mahasiswa.
-</p>
+<div id="fundamentalResult"
+class="result">
+Masukkan data...
 </div>
 
-<section id="m1" class="module">
-<h2>Modul 1 Investasi</h2>
+</div>
 
-<h3>Pengertian Investasi</h3>
-<p>
-Investasi adalah kegiatan menempatkan dana pada aset tertentu
-dengan harapan memperoleh keuntungan di masa depan.
-</p>
+<div class="card">
 
-<h3>Tujuan Investasi</h3>
-<ul>
-<li>Meningkatkan kekayaan</li>
-<li>Melindungi nilai uang dari inflasi</li>
-<li>Mencapai tujuan keuangan jangka panjang</li>
-</ul>
+<h2>Technical Analyzer</h2>
 
-<h3>Aset Investasi</h3>
-<ul>
-<li>Saham</li>
-<li>Obligasi</li>
-<li>Reksa Dana</li>
-<li>Deposito</li>
-<li>Emas</li>
-<li>Properti</li>
-</ul>
-</section>
+<input id="rsi" placeholder="RSI">
 
-<section id="m2" class="module">
-<h2>Modul 2 Pasar Modal</h2>
+<input id="ma20" placeholder="MA20">
 
-<h3>Pengertian</h3>
-<p>
-Pasar modal adalah tempat bertemunya pihak yang membutuhkan dana
-dengan investor yang memiliki dana.
-</p>
+<input id="ma50" placeholder="MA50">
 
-<h3>Jenis Pasar</h3>
-<ul>
-<li>Pasar Primer</li>
-<li>Pasar Sekunder</li>
-<li>Pasar Ketiga</li>
-<li>Pasar Keempat</li>
-</ul>
+<button onclick="analyzeTechnical()">
+Analisis Teknikal
+</button>
 
-<h3>Lembaga Penting</h3>
-<ul>
-<li>OJK</li>
-<li>BEI</li>
-<li>KSEI</li>
-<li>Kliring Indonesia</li>
-</ul>
-</section>
+<div id="technicalResult"
+class="result">
+Masukkan data...
+</div>
 
-<section id="m3" class="module">
-<h2>Modul 3 Return dan Risiko</h2>
+</div>
 
-<h3>Return</h3>
-<p>
-Return adalah keuntungan yang diperoleh investor.
-</p>
-
-<pre>
-Return =
-(Pt - Pt-1 + D)
-/ Pt-1
-</pre>
-
-<h3>Risiko</h3>
-<p>
-Risiko merupakan ketidakpastian hasil investasi.
-</p>
-
-<h3>Diversifikasi</h3>
-<p>
-Diversifikasi membantu mengurangi risiko dengan
-menggabungkan beberapa aset.
-</p>
-</section>
-
-<section id="m4" class="module">
-<h2>Modul 4 Saham</h2>
-
-<h3>Pengertian Saham</h3>
-<p>
-Saham adalah bukti kepemilikan suatu perusahaan.
-</p>
-
-<h3>Jenis Saham</h3>
-<ul>
-<li>Saham Biasa</li>
-<li>Saham Preferen</li>
-</ul>
-
-<h3>Nilai Saham</h3>
-<ul>
-<li>Nilai Nominal</li>
-<li>Nilai Buku</li>
-<li>Nilai Pasar</li>
-<li>Nilai Intrinsik</li>
-</ul>
-</section>
-
-<section id="m5" class="module">
-<h2>Modul 5 Obligasi</h2>
-
-<p>
-Obligasi merupakan surat utang yang memberikan
-kupon secara berkala kepada investor.
-</p>
-
-<pre>
-Harga Obligasi
-=
-PV Kupon
-+
-PV Nilai Nominal
-</pre>
-</section>
-
-<section id="m6" class="module">
-<h2>Modul 6 Konsep Portofolio</h2>
-
-<h3>Attainable Set</h3>
-<p>
-Seluruh kombinasi portofolio yang mungkin dibentuk.
-</p>
-
-<h3>Efficient Set</h3>
-<p>
-Kumpulan portofolio terbaik pada tingkat risiko tertentu.
-</p>
-
-<h3>Portofolio Optimal</h3>
-<p>
-Portofolio yang paling sesuai dengan preferensi investor.
-</p>
-</section>
-
-<section id="m7" class="module">
-<h2>Modul 7 CAPM dan Beta</h2>
-
-<pre>
-E(Ri)=Rf+β(E(Rm)-Rf)
-</pre>
-
-<p>
-Beta mengukur sensitivitas saham terhadap pasar.
-</p>
-</section>
-
-<section id="m8" class="module">
-<h2>Modul 8 Online Trading</h2>
-
-<ul>
-<li>Membuka rekening efek</li>
-<li>Deposit dana</li>
-<li>Menganalisis saham</li>
-<li>Melakukan transaksi</li>
-<li>Monitoring portofolio</li>
-</ul>
-</section>
-
-<section id="m9" class="module">
-<h2>Modul 9 Reksa Dana</h2>
-
-<p>
-Reksa dana merupakan wadah investasi kolektif
-yang dikelola oleh manajer investasi.
-</p>
-
-<h3>Jenis Reksa Dana</h3>
-<ul>
-<li>Pasar Uang</li>
-<li>Pendapatan Tetap</li>
-<li>Campuran</li>
-<li>Saham</li>
-</ul>
-</section>
+</div>
 
 </div>
 
 <script>
+
 function toggleTheme(){
-document.body.classList.toggle('light');
+document.body.classList.toggle("light");
 }
 
-function searchModule(){
+function analyzeFundamental(){
 
-let input =
-document.getElementById('search')
-.value
-.toLowerCase();
+let price =
+parseFloat(document.getElementById("price").value);
 
-let modules =
-document.querySelectorAll('.module');
+let eps =
+parseFloat(document.getElementById("eps").value);
 
-modules.forEach(mod=>{
+let bvps =
+parseFloat(document.getElementById("bvps").value);
 
-if(
-mod.innerText.toLowerCase()
-.includes(input)
-){
-mod.style.display='block';
-}else{
-mod.style.display='none';
+let roe =
+parseFloat(document.getElementById("roe").value);
+
+let der =
+parseFloat(document.getElementById("der").value);
+
+let per = price / eps;
+
+let pbv = price / bvps;
+
+let fairValue = eps * 15;
+
+let graham =
+Math.sqrt(22.5 * eps * bvps);
+
+let score = 0;
+
+if(roe >= 15) score++;
+if(der <= 1) score++;
+if(per <= 15) score++;
+if(pbv <= 3) score++;
+
+let status="";
+
+if(score>=3){
+status="<span class='green'>BUY ✅</span>";
+}
+else if(score==2){
+status="<span class='yellow'>HOLD ⚠️</span>";
+}
+else{
+status="<span class='red'>SELL ❌</span>";
 }
 
-});
+document.getElementById(
+"fundamentalResult"
+).innerHTML =
+
+`
+PER : ${per.toFixed(2)} <br><br>
+
+PBV : ${pbv.toFixed(2)} <br><br>
+
+Fair Value :
+Rp ${fairValue.toLocaleString()} <br><br>
+
+Graham Number :
+${graham.toFixed(2)} <br><br>
+
+ROE : ${roe}% <br><br>
+
+DER : ${der} <br><br>
+
+Status :
+${status}
+
+`;
+
 }
+
+function analyzeTechnical(){
+
+let rsi =
+parseFloat(document.getElementById("rsi").value);
+
+let ma20 =
+parseFloat(document.getElementById("ma20").value);
+
+let ma50 =
+parseFloat(document.getElementById("ma50").value);
+
+let signal="";
+
+if(rsi < 30 && ma20 > ma50){
+
+signal=
+"<span class='green'>BUY 🚀</span>";
+
+}
+else if(rsi > 70){
+
+signal=
+"<span class='red'>SELL 🔻</span>";
+
+}
+else{
+
+signal=
+"<span class='yellow'>HOLD ⏳</span>";
+
+}
+
+let trend =
+ma20 > ma50
+?
+"Bullish 📈"
+:
+"Bearish 📉";
+
+document.getElementById(
+"technicalResult"
+).innerHTML =
+
+`
+Trend :
+${trend}
+<br><br>
+
+RSI :
+${rsi}
+<br><br>
+
+MA20 :
+${ma20}
+<br><br>
+
+MA50 :
+${ma50}
+<br><br>
+
+Signal :
+${signal}
+
+`;
+
+}
+
 </script>
 
 </body>
