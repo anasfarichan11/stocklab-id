@@ -105,7 +105,54 @@ font-weight:bold;
 color:#facc15;
 font-weight:bold;
 }
-
+#landing{
+7
+height:100vh;
+8
+display:flex;
+9
+flex-direction:column;
+10
+justify-content:center;
+11
+align-items:center;
+12
+text-align:center;
+13
+}
+14
+ 
+15
+#landing h1{
+16
+font-size:60px;
+17
+margin-bottom:20px;
+18
+}
+19
+ 
+20
+#landing p{
+21
+font-size:20px;
+22
+max-width:700px;
+23
+margin-bottom:30px;
+24
+}
+25
+ 
+26
+#analyzer{
+27
+display:none;
+28
+}
+29
+ 
+30
 </style>
 </head>
 
@@ -120,7 +167,7 @@ berbasis data laporan keuangan.
 </p>
 
 <button onclick="showAnalyzer()">
-Mulai Analisis
+🚀 Mulai Analisis
 </button>
 
 </section>
@@ -218,7 +265,15 @@ Belum ada saham
 function toggleTheme(){
 document.body.classList.toggle("light");
 }
+function showAnalyzer(){
 
+document.getElementById("landing")
+.style.display = "none";
+
+document.getElementById("analyzer")
+.style.display = "block";
+
+}
 function analyzeFundamental(){
 
 let price =
