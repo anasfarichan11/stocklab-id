@@ -467,8 +467,33 @@ html = "Belum ada saham";
 data.forEach(stock=>{
 
 html += `
-<div>
-✅ ${stock}
+<div style="
+display:flex;
+gap:10px;
+margin-bottom:10px;
+">
+
+<button
+onclick="loadStock('${stock}')"
+style="
+width:auto;
+padding:10px 15px;
+"
+>
+📈 ${stock}
+</button>
+
+<button
+onclick="deleteStock('${stock}')"
+style="
+width:auto;
+background:#ef4444;
+padding:10px 15px;
+"
+>
+❌
+</button>
+
 </div>
 `;
 
@@ -481,13 +506,39 @@ document.getElementById(
 ).innerHTML = html;
 
 }
+}
+
+function deleteStock(stock){
+
+let data =
+JSON.parse(
+localStorage.getItem("watchlist")
+) || [];
+
+data = data.filter(
+item => item !== stock
+);
+
+localStorage.setItem(
+"watchlist",
+JSON.stringify(data)
+);
+
+renderWatchlist();
+
+}
+
+function loadStock(stock){
+
+alert("Memuat data " + stock);
+
+}
 
 window.onload = function(){
 
 renderWatchlist();
 
-}
-</script>
+}</script>
 
 </body>
 </html>
