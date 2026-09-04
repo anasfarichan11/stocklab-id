@@ -202,26 +202,51 @@ let pbv = price / bvps;
 
 let fairValue = eps * 15;
 
+let marginSafety =
+((fairValue - price) / fairValue) * 100;
+
 let graham =
 Math.sqrt(22.5 * eps * bvps);
 
 let score = 0;
 
-if(roe >= 15) score++;
-if(der <= 1) score++;
-if(per <= 15) score++;
-if(pbv <= 3) score++;
+if(roe >= 15) score += 25;
 
-let status="";
+if(der <= 1) score += 25;
 
-if(score>=3){
-status="<span class='green'>BUY ✅</span>";
+if(per <= 15) score += 25;
+
+if(pbv <= 3) score += 25;
+
+let status = "";
+let category = "";
+
+if(score >= 75){
+
+status =
+"<span class='green'>BUY ✅</span>";
+
+category =
+"<span class='green'>Excellent</span>";
+
 }
-else if(score==2){
-status="<span class='yellow'>HOLD ⚠️</span>";
+else if(score >= 50){
+
+status =
+"<span class='yellow'>HOLD ⚠️</span>";
+
+category =
+"<span class='yellow'>Good</span>";
+
 }
 else{
-status="<span class='red'>SELL ❌</span>";
+
+status =
+"<span class='red'>SELL ❌</span>";
+
+category =
+"<span class='red'>Poor</span>";
+
 }
 
 document.getElementById(
@@ -239,11 +264,23 @@ Rp ${fairValue.toLocaleString()} <br><br>
 Graham Number :
 ${graham.toFixed(2)} <br><br>
 
-ROE : ${roe}% <br><br>
+ROE :
+${roe}% <br><br>
 
-DER : ${der} <br><br>
+DER :
+${der} <br><br>
+
+Margin of Safety :
+${marginSafety.toFixed(2)}% <br><br>
+
+Stock Score :
+${score}/100 <br><br>
+
+Kategori :
+${category} <br><br>
 
 Status :
+
 ${status}
 
 `;
