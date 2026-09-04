@@ -237,16 +237,29 @@ Math.sqrt(22.5 * eps * bvps);
 let score = 0;
 
 if(roe >= 15) score += 25;
-
 if(der <= 1) score += 25;
-
 if(per <= 15) score += 25;
-
 if(pbv <= 3) score += 25;
+
+let strengths = [];
+
+if(roe >= 15)
+strengths.push("✅ ROE tinggi");
+
+if(der <= 1)
+strengths.push("✅ DER sehat");
+
+if(per <= 15)
+strengths.push("✅ PER menarik");
+
+if(pbv <= 3)
+strengths.push("✅ PBV wajar");
+``
 
 let status = "";
 let category = "";
-
+let strengths = [];
+  
 if(score >= 75){
 
 status =
@@ -274,7 +287,28 @@ category =
 "<span class='red'>Poor</span>";
 
 }
+if(score >= 75){
 
+conclusion =
+strengths.join("<br>") +
+"<br><br>" +
+"Saham memiliki fundamental yang cukup baik berdasarkan data yang dimasukkan.";
+
+}
+else if(score >= 50){
+
+conclusion =
+"⚠️ Fundamental cukup baik.<br>" +
+"Masih ada beberapa aspek yang perlu diperhatikan sebelum membeli saham ini.";
+
+}
+else{
+
+conclusion =
+"❌ Fundamental kurang menarik.<br>" +
+"Risiko relatif tinggi dan perlu analisis lebih lanjut.";
+
+}
 document.getElementById(
 "fundamentalResult"
 ).innerHTML =
@@ -308,6 +342,14 @@ ${category} <br><br>
 Status :
 
 ${status}
+
+<br><br>
+
+Kesimpulan :
+
+<br><br>
+
+${conclusion}
 
 `;
 
