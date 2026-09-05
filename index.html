@@ -188,7 +188,7 @@ display:none;
 
 <p>
 Analisis Fundamental dan Teknikal Saham Indonesia
-berbasis data laporan keuangan.
+Berbasis Data Laporan Keuangan.
 </p>
 
 <button onclick="showAnalyzer()">
@@ -203,9 +203,18 @@ berbasis data laporan keuangan.
 
 <h1>📊 Dashboard Analisis Saham</h1>
 
+<div>
+
+<button onclick="goHome()">
+🏠 Beranda
+</button>
+
 <button onclick="toggleTheme()">
 🌙 Theme
 </button>
+
+</div>
+
 </header>
 
 <div class="card">
@@ -292,11 +301,28 @@ document.body.classList.toggle("light");
 function showAnalyzer(){
 
 document.getElementById("landing")
+
 .style.display = "none";
 
-document.getElementById("analyzer")
-.style.display = "block";
+ 
 
+document.getElementById("analyzer")
+
+.style.display = "block";
+ 
+}
+ 
+function goHome(){
+ 
+document.getElementById("analyzer")
+
+.style.display = "none";
+
+
+document.getElementById("landing")
+
+.style.display = "flex";
+ 
 }
 function analyzeFundamental(){
 
