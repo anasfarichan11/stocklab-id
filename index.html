@@ -48,7 +48,9 @@ margin-bottom:20px;
 
 .grid{
 display:grid;
-grid-template-columns:1fr 1fr
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:20px;
+}
 
 input{
 width:100%;
@@ -215,7 +217,6 @@ Berbasis Data Laporan Keuangan.
 
 </header>
 
-<div class="grid">
 <div class="card">
 
 <h2>Fundamental Analyzer</h2>
@@ -259,7 +260,7 @@ Analisis Teknikal
 class="result">
 Masukkan data...
 </div>
-</div>
+
 </div>
 
 <div class="card">
