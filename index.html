@@ -183,7 +183,7 @@ berbasis data laporan keuangan.
 </button>
 </header>
 
-<<div class="card">
+<div class="card">
 
 <h2>Fundamental Analyzer</h2>
 
@@ -324,11 +324,10 @@ strengths.push("✅ PER menarik");
 
 if(pbv <= 3)
 strengths.push("✅ PBV wajar");
-``
 
 let status = "";
 let category = "";
-let strengths = [];
+let conclusion = "";
   
 if(score >= 75){
 
@@ -495,7 +494,7 @@ function addWatchlist(){
 
 let stock =
 document.getElementById("stockInput")
-.value.toUpperCase();
+.value.toUpperCase().trim();
 
 if(!stock) return;
 
@@ -503,6 +502,11 @@ let data =
 JSON.parse(
 localStorage.getItem("watchlist")
 ) || [];
+
+if(data.includes(stock)){
+alert("Saham sudah ada di watchlist");
+return;
+}
 
 data.push(stock);
 
@@ -516,7 +520,6 @@ renderWatchlist();
 document.getElementById(
 "stockInput"
 ).value = "";
-
 }
 
 function renderWatchlist(){
@@ -574,8 +577,6 @@ padding:10px 15px;
 document.getElementById(
 "watchlist"
 ).innerHTML = html;
-
-}
 }
 
 function deleteStock(stock){
