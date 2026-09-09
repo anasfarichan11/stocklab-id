@@ -240,6 +240,9 @@ Berbasis Data Laporan Keuangan.
 
 <button onclick="analyzeFundamental()">
 Analisis Fundamental
+  
+<button onclick="resetForm()">
+🔄 Reset Form
 </button>
 
 <div id="fundamentalResult"
@@ -548,6 +551,26 @@ ${signal}
 `;
 
 }
+
+function resetForm(){
+ 
+document.getElementById("price").value = "";
+document.getElementById("eps").value = "";
+document.getElementById("bvps").value = "";
+document.getElementById("roe").value = "";
+document.getElementById("der").value = "";
+ 
+document.getElementById("rsi").value = "";
+document.getElementById("ma20").value = "";
+document.getElementById("ma50").value = "";
+
+document.getElementById("fundamentalResult").innerHTML =
+"Masukkan data...";
+document.getElementById("technicalResult").innerHTML =
+"Masukkan data...";
+
+}
+  
 function addWatchlist(){
 
 let stock =
