@@ -228,6 +228,8 @@ Berbasis Data Laporan Keuangan.
 
 <h2>Fundamental Analyzer</h2>
 
+<input id="stockName" placeholder="Kode Saham (BBCA)">
+  
 <input id="price" placeholder="Harga Saham">
 
 <input id="eps" placeholder="EPS">
@@ -270,7 +272,16 @@ Masukkan data...
 </div>
 
 </div>
+
 <div class="card" style="text-align:center;">
+
+<button
+onclick="saveAnalysis()"
+style="background:#22c55e;">
+💾 Simpan Analisis
+</button>
+
+<br><br>
 
 <button
 onclick="resetForm()"
@@ -279,6 +290,17 @@ style="background:#ef4444;">
 </button>
 
 </div>
+
+<div class="card">
+
+<h2>📂 Riwayat Analisis</h2>
+
+<div id="history" class="result">
+Belum ada riwayat analisis
+</div>
+
+</div>
+  
 <div class="card">
 <h2>⭐ Watchlist</h2>
 
@@ -559,7 +581,8 @@ ${signal}
 }
 
 function resetForm(){
- 
+
+document.getElementById("stockName").value = "";
 document.getElementById("price").value = "";
 document.getElementById("eps").value = "";
 document.getElementById("bvps").value = "";
@@ -576,6 +599,106 @@ document.getElementById("technicalResult").innerHTML =
 "Masukkan data...";
 
 }
+
+function saveAnalysis(){
+
+let stock =
+
+document.getElementById("stockName")
+
+.value.toUpperCase().trim();
+
+if(!stock){
+
+alert("Masukkan kode saham terlebih dahulu");
+
+return;
+
+}
+
+let history =
+
+JSON.parse(
+
+localStorage.getItem("history")
+
+) || [];
+
+history.push({
+
+stock: stock,
+
+date: new Date()
+
+.toLocaleString("id-ID")
+
+});
+
+localStorage.setItem(
+
+"history",
+
+JSON.stringify(history)
+
+);
+
+renderHistory();
+
+alert(
+
+"Analisis berhasil disimpan"
+
+);
+
+}
+
+function renderHistory(){
+ 
+let history =
+ 
+JSON.parse(
+localStorage.getItem("history")
+) || [];
+ 
+let html = "";
+ 
+if(history.length === 0){
+ 
+html =
+"Belum ada riwayat analisis";
+ 
+}else{
+ 
+history.slice().reverse().forEach(item => {
+ 
+html += `
+ 
+<div style="
+padding:10px;
+margin-bottom:10px;
+background:#0f172a;
+border-radius:10px;
+">
+ 
+📈 ${item.stock}
+ 
+<br><br>
+ 
+🕒 ${item.date}
+ 
+</div>
+ 
+`;
+ 
+});
+ 
+}
+ 
+document.getElementById("history")
+.innerHTML = html;
+ 
+}
+``
   
 function addWatchlist(){
 
@@ -693,8 +816,13 @@ alert("Memuat data " + stock);
 }
 
 window.onload = function(){
-
+ 
 renderWatchlist();
+ 
+renderHistory();
+ 
+}
+``
 
 }</script>
 
